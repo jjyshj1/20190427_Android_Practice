@@ -35,19 +35,17 @@ public class PizzaStoreAdapter extends ArrayAdapter<PizzaStore> {
         View row = convertView;
 
         if (row == null) {
-            row = inf.inflate(R.layout.pizza_spinner_list_item, null);
+
+            row = inf.inflate(R.layout.pizza_spinner_item, null);
         }
 
         PizzaStore  storeData = mList.get(position);
 
         ImageView logoImgView = row.findViewById(R.id.logoImgView);
         TextView nameTxt = row.findViewById(R.id.nameTxt);
-        TextView locationTxt = row.findViewById(R.id.locationTxt);
-        TextView openTimeTxt = row.findViewById(R.id.openTimeTxt);
+
 
         nameTxt.setText(storeData.storeName);
-        locationTxt.setText(String.format("(%s)", storeData.location));
-        openTimeTxt.setText(storeData.openTime);
         return row;
     }
 
