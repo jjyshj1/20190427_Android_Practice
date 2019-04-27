@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.example.a20190427_android_practice.adapter.PizzaStoreAdapter;
 import com.example.a20190427_android_practice.databinding.ActivitySpinnerBinding;
@@ -29,6 +32,31 @@ public class SpinnerActivity extends AppCompatActivity {
 
         pizzaStoreAdaper = new PizzaStoreAdapter(SpinnerActivity.this, pizzaStores);
         act.pizzaStoreSpinner.setAdapter(pizzaStoreAdaper);
+
+
+        act.pizzaStoreSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(SpinnerActivity.this, String.format("%s 선택", pizzaStores.get(position).storeName), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+                act.confirmBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int selectedPosition = act.pizzaStoreSpinner.getSelectedItemPosition();
+
+//                그 가게의 이름?
+                        String selectedPizzaStoreName = pizzaStores.get(selectedPosition).storeName;
+
+                        Toast.makeText(SpinnerActivity.this, String.format("현재 선택된 가게이름 : %s", selectedPizzaStoreName), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     void fillPizzaStores(){
